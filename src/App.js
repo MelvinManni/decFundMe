@@ -5,6 +5,7 @@ import CreateFundMe from "./pages/CreateFundMe";
 import Home from "./pages/Home";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useEffect } from "react";
+import Footer from "./components/Footer";
 
 function App() {
   const { getAccount, connectToContract, connectToBlockchain } = useStoreActions((actions) => actions.connection);
@@ -23,13 +24,14 @@ function App() {
   }, [connected]);
   return (
     <>
-      <NavBar />
       <BrowserRouter>
+        <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/create-funding-post" component={CreateFundMe} />
           <Route exact path="/all-posts" component={AllFundings} />
         </Switch>
+        <Footer />
       </BrowserRouter>
     </>
   );

@@ -9,8 +9,9 @@ import Title from "../Typography/Title";
 import styled from "styled-components";
 import colors from "../../assets/jss/colours";
 import { use } from "chai";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import Loader from "../Loader/Loading";
+import Alert from "../../config/sweetalert";
 
 const InputWrapper = styled.div`
   display: flex;
@@ -32,11 +33,13 @@ const Button = styled.button`
   border: 0;
   width: max-content;
   color: #fff;
+  cursor: pointer;
   border-radius: 0px 8px 8px 0px;
   :disabled {
     background-color: ${colors.secondary};
     color: ${colors.text};
     opacity: 0.65;
+    cursor: auto;
   }
 `;
 
@@ -57,6 +60,7 @@ export default function FundCard({ currentAmount, requestAmount, name, descripti
   const [amountToFund, setAmountToFund] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const { contract, account } = useStoreState((state) => state.connection);
+  const { getPosts } = useStoreActions((action) => action.posts);
   const numRegex = /^\d+(?:\.\d{1,4})?$/;
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -66,6 +70,8 @@ export default function FundCard({ currentAmount, requestAmount, name, descripti
       setTimeout(() => {
         setLoading(false);
       }, 400);
+      getPosts();
+      Alert({ message: `Funding for ${amountToFund} Ether successful!`, type: "success" });
       setAmountToFund("");
     } catch (error) {
       setLoading(false);

@@ -2,6 +2,7 @@ import { action, thunk } from "easy-peasy";
 import Web3 from "web3";
 
 import Decfundme from "../abis/Decfundme.json";
+import Alert from "../config/sweetalert";
 
 const connection = {
   connected: null,
@@ -36,20 +37,22 @@ const connection = {
         await window.ethereum.enable();
         setTimeout(() => {
           actions.setConnected();
+          Alert({ message: "Successfully connected to the blockchain", type: "success" });
         }, 600);
       } else if (window.web3) {
         window.web3 = new Web3(window.web3.currentProvider);
         setTimeout(() => {
           actions.setConnected();
+          Alert({ message: "Successfully connected to the blockchain", type: "success" });
         }, 600);
       } else {
-        window.alert("Non-Ethereum browser detected, you should consider trying metamask");
+        Alert({ message: "Non-Ethereum browser detected, you should consider trying metamask", type: "warning" });
         setTimeout(() => {
           actions.resetLoading();
         }, 600);
       }
     } catch (e) {
-      console.log(e);
+      Alert({ message: e.message, type: "error" });
       actions.resetLoading();
     }
   }),
@@ -61,6 +64,7 @@ const connection = {
       actions.setAccount(accounts[0]);
     } catch (e) {
       console.log(e);
+      Alert({ message: e.message, type: "error" });
     }
   }),
 
@@ -74,10 +78,11 @@ const connection = {
         const decfundme = await new web3.eth.Contract(Decfundme.abi, network.address);
         actions.setContract(decfundme);
       } else {
-        alert("Error");
+        Alert({ message: "This network does not exxist on the smart contract", type: "warning" });
       }
     } catch (e) {
       console.log(e);
+      Alert({ message: e.message, type: "error" });
       actions.resetLoading();
     }
   }),

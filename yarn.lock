@@ -17500,6 +17500,11 @@ swarm-js@^0.1.40:
     tar "^4.0.2"
     xhr-request "^1.0.1"
 
+sweetalert2@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.1.0.tgz#c5f58d8ccdbb89739d971c175a1aefb856f29cf4"
+  integrity sha512-gZKO1G7u/0Bu89CZ48AfYAecqRhz9Jp58BrBhuJYoaS/oaquLUuwmx3wrxiLaZhB5FDQlETPVt7OokJIHReJgQ==
+
 symbol-observable@^1.0.3, symbol-observable@^1.0.4, symbol-observable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"

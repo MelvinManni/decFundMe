@@ -43,6 +43,38 @@ code {
   align-items: center;
 }
 
+.swal2-container.swal2-top-end > .swal2-popup,
+.swal2-container.swal2-top-right > .swal2-popup {
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.swal2-popup.swal2-toast {
+  box-shadow: none;
+}
+
+.swal2-popup.swal2-toast.swal2-icon-success {
+  background: #28a746;
+}
+
+.swal2-popup.swal2-toast.swal2-icon-error {
+  background: #dc3545;
+}
+
+.swal2-popup.swal2-toast.swal2-icon-warning {
+  background: rgb(212, 163, 0);
+}
+
+.swal2-popup.swal2-toast.swal2-icon-info {
+  background: #00a2ff;
+}
+
+.swal2-popup.swal2-toast .swal2-title {
+  color: #fff;
+  margin: 1em 0.3em;
+}
+
 @media all and (max-width: 640px) {
   .responsive-grid {
     display: grid;

@@ -8,6 +8,7 @@ import Input from "../components/Input/Input";
 import Textarea from "../components/Input/Textarea";
 import Text from "../components/Typography/Text";
 import Title from "../components/Typography/Title";
+import Alert from "../config/sweetalert";
 
 //Declare IPFS
 const ipfsClient = require("ipfs-http-client");
@@ -48,9 +49,9 @@ export default function CreateFundMe() {
         amountRequested: "",
       });
       e.target.reset();
-      alert("Funding request successful");
+      Alert({ message: "Funding request upload successful", type: "success" });
     } catch (error) {
-      console.log(error);
+      Alert({ message: error.message, type: "error" });
       setLoading(false);
     }
   };
