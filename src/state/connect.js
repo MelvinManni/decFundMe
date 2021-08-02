@@ -1,10 +1,17 @@
 import { action, thunk } from "easy-peasy";
 import Web3 from "web3";
 
+import Decfundme from "../abis/Decfundme.json";
+
 const connection = {
   connected: null,
   loading: false,
   account: null,
+  contract: null,
+  setContract: action((state, payload) => {
+    state.contract = payload;
+    state.loading = false;
+  }),
   initialize: action((state) => {
     state.connected = null;
     state.account = null;
@@ -20,6 +27,7 @@ const connection = {
   setAccount: action((state, payload) => {
     state.account = payload;
   }),
+
   connectToBlockchain: thunk(async (actions) => {
     actions.initialize();
     try {
@@ -45,6 +53,7 @@ const connection = {
       actions.resetLoading();
     }
   }),
+
   getAccount: thunk(async (actions) => {
     try {
       const web3 = window.web3;
@@ -54,7 +63,24 @@ const connection = {
       console.log(e);
     }
   }),
-  
+
+  connectToContract: thunk(async (actions) => {
+    actions.initialize();
+    try {
+      const web3 = window.web3;
+      const networkId = await web3.eth.net.getId();
+      const network = Decfundme.networks[networkId];
+      if (network) {
+        const decfundme = await new web3.eth.Contract(Decfundme.abi, network.address);
+        actions.setContract(decfundme);
+      } else {
+        alert("Error");
+      }
+    } catch (e) {
+      console.log(e);
+      actions.resetLoading();
+    }
+  }),
 };
 
 export default connection;

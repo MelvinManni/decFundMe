@@ -7,11 +7,18 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { useEffect } from "react";
 
 function App() {
-  const { getAccount } = useStoreActions((actions) => actions.connection);
+  const { getAccount, connectToContract, connectToBlockchain } = useStoreActions((actions) => actions.connection);
   const { connected } = useStoreState((state) => state.connection);
-  
+
   useEffect(() => {
-    connected && getAccount();
+    if (window.web3) connectToBlockchain();
+  }, []);
+
+  useEffect(() => {
+    if (connected) {
+      getAccount();
+      connectToContract();
+    }
     // eslint-disable-next-line
   }, [connected]);
   return (
@@ -21,7 +28,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/create-funding-post" component={CreateFundMe} />
-          <Route exact path="/all-post" component={AllFundings} />
+          <Route exact path="/all-posts" component={AllFundings} />
         </Switch>
       </BrowserRouter>
     </>

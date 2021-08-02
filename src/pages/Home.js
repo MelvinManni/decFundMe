@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import img from "../assets/img/card.png";
 import { GridCol, GridContainer } from "../assets/jss/flexGrid";
 import Section from "../assets/jss/section";
@@ -22,7 +23,9 @@ export default function Home() {
             </Text>
             <Text block>To get started click the button below.</Text>
 
-            <CustomButton mt="60px">Get Started</CustomButton>
+            <CustomButton linkTo="/create-funding-post" mt="60px">
+              Get Started
+            </CustomButton>
             <Text size={13} mt="10px">
               we rise by lifting others.
             </Text>
@@ -49,6 +52,9 @@ export default function Home() {
 
           <GridCol xs={12} lg={4}>
             <FundCard />
+          </GridCol>
+          <GridCol xs={12}>
+            <Link to="/all-posts">View All</Link>
           </GridCol>
         </GridContainer>
       </Section>

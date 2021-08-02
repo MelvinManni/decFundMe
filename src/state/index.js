@@ -1,10 +1,10 @@
 import { createStore } from "easy-peasy";
-import postings from "./posts";
 import connection from "./connect";
+import posts from './posts'
 
 const store = createStore({
-  postings,
   connection,
+  posts,
 });
 
 export default store;

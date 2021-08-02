@@ -9,9 +9,9 @@ const Inputstyle = styled.textarea`
   width: 100%;
   border-radius: 3px;
   font-weight: 500;
-  font-size: 15;
-  color: ${colors.secondary};
-  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  color: ${colors.text};
+  font-family: "Nunito", sans-serif;
 `;
 
 export default function Textarea({ label, rows, ...rest }) {

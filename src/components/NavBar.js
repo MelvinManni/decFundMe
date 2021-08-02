@@ -5,6 +5,7 @@ import CustomButton from "./Button/Button";
 import Text from "./Typography/Text";
 import Title from "./Typography/Title";
 import Identicon from "react-identicons";
+import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   padding: 5px 40px;
@@ -19,12 +20,14 @@ export default function NavBar() {
 
   return (
     <Nav>
-      <Title size={20} line>
-        dec
-        <Text weight={600} primary>
-          FundMe
-        </Text>
-      </Title>
+      <a href="/">
+        <Title size={20} line>
+          dec
+          <Text weight={600} primary>
+            FundMe
+          </Text>
+        </Title>
+      </a>
 
       {account !== null ? (
         <div className="row">
@@ -32,7 +35,9 @@ export default function NavBar() {
           <Text ml="10px">{account.substring(0, 10) + "..."}</Text>
         </div>
       ) : (
-        <CustomButton loading={loading} onClick={() => connectToBlockchain()}>Connect</CustomButton>
+        <CustomButton loading={loading} onClick={() => connectToBlockchain()}>
+          Connect
+        </CustomButton>
       )}
     </Nav>
   );

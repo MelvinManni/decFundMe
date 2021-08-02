@@ -12,9 +12,9 @@ const Inputstyle = styled.input`
   border-style: solid;
   border-color: #ccc;
   font-weight: 500;
-  font-size: 15;
-  color: ${colors.secondary};
-  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  color: ${colors.text};
+  font-family: "Nunito", sans-serif;
 `;
 
 export default function Input({ label, helperText, ...rest }) {
