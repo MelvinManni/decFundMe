@@ -1,3 +1,4 @@
+import { useStoreActions, useStoreState } from "easy-peasy";
 import React from "react";
 import { Link } from "react-router-dom";
 import img from "../assets/img/card.png";
@@ -5,10 +6,27 @@ import { GridCol, GridContainer } from "../assets/jss/flexGrid";
 import Section from "../assets/jss/section";
 import CustomButton from "../components/Button/Button";
 import FundCard from "../components/Card/FundCard";
+import Loader from "../components/Loader/Loading";
 import Text from "../components/Typography/Text";
 import Title from "../components/Typography/Title";
 
 export default function Home() {
+  const { contract } = useStoreState((state) => state.connection);
+  const { getPosts } = useStoreActions((action) => action.posts);
+  const { data, loading } = useStoreState((state) => state.posts);
+  const [posts, setPosts] = React.useState([]);
+
+  console.log(data);
+
+  React.useEffect(() => {
+    getPosts();
+  }, [contract]);
+
+  React.useEffect(async () => {
+    if (data !== []) {
+      setPosts(data);
+    }
+  }, [data]);
   return (
     <>
       <Section>
@@ -24,7 +42,7 @@ export default function Home() {
             <Text block>To get started click the button below.</Text>
 
             <CustomButton linkTo="/create-funding-post" mt="60px">
-              Get Started
+              Create a request
             </CustomButton>
             <Text size={13} mt="10px">
               we rise by lifting others.
@@ -42,20 +60,33 @@ export default function Home() {
         </div>
 
         <GridContainer>
-          <GridCol xs={12} lg={4}>
-            <FundCard />
-          </GridCol>
-
-          <GridCol xs={12} lg={4}>
-            <FundCard />
-          </GridCol>
-
-          <GridCol xs={12} lg={4}>
-            <FundCard />
-          </GridCol>
-          <GridCol xs={12}>
-            <Link to="/all-posts">View All</Link>
-          </GridCol>
+          {loading ? (
+            <Loader size="70" />
+          ) : (
+            posts.map(
+              (post, index) =>
+                index < 3 && (
+                  <GridCol key={index} xs={12} lg={4}>
+                    <FundCard
+                      currentAmount={window.web3.utils.fromWei(post.amountFunded?.toString(), "Ether")}
+                      requestAmount={window.web3.utils.fromWei(post.amountRequested?.toString(), "Ether")}
+                      name={post.name}
+                      description={post.description}
+                      title={post.title}
+                      image={post.imageHash}
+                      id={post.id}
+                    />
+                  </GridCol>
+                )
+            )
+          )}
+          {posts.length > 0 && (
+            <div className="w-100">
+              <Text mt="20px" >
+                <Link to="/all-posts">View All</Link>
+              </Text>
+            </div>
+          )}
         </GridContainer>
       </Section>
     </>
