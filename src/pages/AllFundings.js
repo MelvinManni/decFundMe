@@ -15,13 +15,17 @@ export default function AllFundings() {
 
   React.useEffect(() => {
     getPosts();
+      // eslint-disable-next-line
   }, [contract]);
 
-  React.useEffect(async () => {
+  React.useEffect( () => {
     if (data !== []) {
       setPosts(data);
     }
+        // eslint-disable-next-line
   }, [data]);
+
+
   return (
     <Section>
       <GridContainer justify="center">

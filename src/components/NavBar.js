@@ -5,7 +5,7 @@ import CustomButton from "./Button/Button";
 import Text from "./Typography/Text";
 import Title from "./Typography/Title";
 import Identicon from "react-identicons";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   padding: 5px 40px;
@@ -17,18 +17,18 @@ const Nav = styled.nav`
 export default function NavBar() {
   const { connectToBlockchain } = useStoreActions((actions) => actions.connection);
   const { account, loading } = useStoreState((state) => state.connection);
-  const history = useHistory();
+  
 
   return (
     <Nav>
-      <div style={{ cursor: "pointer" }} onClick={() => history.push("/")}>
+      <Link to="/">
         <Title size={20} line>
           dec
           <Text weight={600} primary>
             FundMe
           </Text>
         </Title>
-      </div>
+      </Link>
 
       {account !== null ? (
         <div className="row">

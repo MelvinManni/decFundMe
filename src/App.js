@@ -13,6 +13,7 @@ function App() {
 
   useEffect(() => {
     if (window.web3) connectToBlockchain();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

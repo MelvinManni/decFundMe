@@ -20,9 +20,11 @@ export default function Home() {
 
   React.useEffect(() => {
     getPosts();
+
+    // eslint-disable-next-line
   }, [contract]);
 
-  React.useEffect(async () => {
+  React.useEffect(() => {
     if (data !== []) {
       setPosts(data);
     }
@@ -82,7 +84,7 @@ export default function Home() {
           )}
           {posts.length > 0 && (
             <div className="w-100">
-              <Text mt="20px" >
+              <Text mt="20px">
                 <Link to="/all-posts">View All</Link>
               </Text>
             </div>

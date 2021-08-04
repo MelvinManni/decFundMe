@@ -8,7 +8,6 @@ import Text from "../Typography/Text";
 import Title from "../Typography/Title";
 import styled from "styled-components";
 import colors from "../../assets/jss/colours";
-import { use } from "chai";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import Loader from "../Loader/Loading";
 import Alert from "../../config/sweetalert";

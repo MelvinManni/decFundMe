@@ -16,7 +16,7 @@ export default function Footer() {
     <FooterWrapper>
       <Text color="text">
         Built with ❤️ by{" "}
-        <a href="https://github.com/MelvinManni" target="_blank">
+        <a rel="noreferrer" href="https://github.com/MelvinManni" target="_blank">
           <Text primary>melvin-manni</Text>
         </a>
       </Text>

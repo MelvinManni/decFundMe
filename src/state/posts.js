@@ -1,7 +1,5 @@
 import { action, thunk } from "easy-peasy";
-import Web3 from "web3";
 import store from ".";
-import Decfundme from "../abis/Decfundme.json";
 import Alert from "../config/sweetalert";
 
 const connection = {
